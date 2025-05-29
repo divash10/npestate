@@ -1,0 +1,32 @@
+name: React Frontend CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22' # Adjust this based on `node -v`
+
+      - name: Install Dependencies
+        run: npm ci
+
+      #- name: Lint (optional, if you have ESLint set up)
+      #  run: npm run lint
+
+      - name: Build App
+        run: npm run build
+
+      #- name: Run Tests (optional, if set up)
+       # run: npm test -- --watchAll=false
